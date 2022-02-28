@@ -194,8 +194,8 @@
                 }
             },
             "responses": {
-                "201": {
-                    "description": "New schedule created for user",
+                "200": {
+                    "description": "Schedule Updated",
                     "content": {
                         "application/json": {
                             "schema": {
