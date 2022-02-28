@@ -1,0 +1,4 @@
+run these commands to start the application
+
+docker-compose up -d
+npm run insatll

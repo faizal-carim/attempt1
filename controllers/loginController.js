@@ -21,7 +21,7 @@ const login = async (req, res) => {
             const jsonToken = jwt.sign({user},"invygo", {
                 expiresIn : "1h"
             });
-            return res.status(201).json({
+            return res.status(200).json({
                 success:1,
                 message:"Login successful",
                 token:jsonToken
