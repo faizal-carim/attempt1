@@ -81,12 +81,12 @@ const getUserSchedule = async (req, res) => {
                         } 
                     }
                 });
-                return res.status(201).json(schedules);
+                return res.status(200).json(schedules);
             }else{
                 const schedules = await Schedule.findAll({
                     where: {userId: userId}
                 });
-                return res.status(201).json(schedules);
+                return res.status(200).json(schedules);
             }
         }
     }catch(err){

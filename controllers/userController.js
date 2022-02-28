@@ -22,6 +22,7 @@ const updateUser = async (req, res) => {
             if(role != null)
                 user.role = role;
             await user.save();
+            user.password = undefined;
             return res.status(200).json({ 'success': 'User Updated', user});
         }
     }catch(err){
@@ -81,7 +82,7 @@ const getUsersInOrderOfTotalShiftLength = async (req, res) => {
             return b.totalHours - a.totalHours;
         });
 
-        return res.status(201).json(users);    
+        return res.status(200).json(users);    
     }catch(err){
         return res.status(500).json({ 'message': err.message });
     }

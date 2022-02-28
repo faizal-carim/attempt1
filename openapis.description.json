@@ -1,0 +1,621 @@
+[{
+    "/register": {
+        "post": {
+            "description": "Allows a user to register a new account",
+            "requestBody": {
+                "name": "${username}",
+                "email": "${email}",
+                "password": "${password}",
+                "role": "${role}"
+            },
+            "responses": {
+                "201": {
+                    "description": "The user was created successfully",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "success": "New user created",
+                                    "name": "${username}"
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request - some required information was missing",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "Bad Request"
+                                }
+                            }
+                        }
+                    }
+                },
+                "409": {
+                    "description": "Conflict - the email is already registered",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "Conflict"
+                                }
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "Server error occured - this could be due to an error in the application",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "${errorMessage}"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+{
+    "/login": {
+        "post": {
+            "description": "Allows a user to login and return a bearer token if successful",
+            "requestBody": {
+                "email": "${email}",
+                "password": "${password}"
+            },
+            "responses": {
+                "200": {
+                    "description": "Login successfully - this returns the bearer jsonwebtoken to be used in authorization header",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "success": 1,
+                                    "message": "Login successful",
+                                    "token": "${token}"
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request - either the email or password are wrong",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "Invalid email or password"
+                                }
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "Server error occured - this could be due to an error in the application",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "${errorMessage}"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+{
+    "/newSchedule": {
+        "post": {
+            "description": "Allows a user to create a new schedule",
+            "requestBody": {
+                "userId": 1,
+                "workDate": "2022-04-18",
+                "shiftLength": 8
+            },
+            "headers": {
+                "authorization": {
+                    "Bearer": "{login_provided_bearer_token}"
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "New schedule created for user",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "success": "New schedule created for user",
+                                    "userId": 1
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request - some fields are missing from the request body",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "Bad Request"
+                                }
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "Server error occured - this could be due to an error in the application - or an invalid user",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "${errorMessage}"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+{
+    "/updateSchedule": {
+        "patch": {
+            "description": "Allows a user to update an existing schedule",
+            "requestBody": {
+                "scheduleId": 2,
+                "workDate": "2022-03-14",
+                "shiftLength": 8
+            },
+            "headers": {
+                "authorization": {
+                    "Bearer": "{login_provided_bearer_token}"
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "New schedule created for user",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "success": "Schedule Updated",
+                                    "schedule": {
+                                        "id": 2,
+                                        "workDate": "2022-03-14",
+                                        "shiftLength": 8,
+                                        "createdAt": "2022-02-27T09:43:26.000Z",
+                                        "updatedAt": "2022-02-27T09:44:17.773Z",
+                                        "userId": 2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request - some fields are missing from the request body",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "Bad Request"
+                                }
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "Server error occured - this could be due to an error in the application - or an invalid schedule",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "${errorMessage}"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+{
+    "/removeSchedule": {
+        "delete": {
+            "description": "Allows a user to remove an existing schedule",
+            "requestBody": {
+                "scheduleId": 3
+            },
+            "headers": {
+                "authorization": {
+                    "Bearer": "{login_provided_bearer_token}"
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Schedule was removed",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "success": "Schedule Removed"
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request - some fields are missing from the request body",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "Bad Request"
+                                }
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "Server error occured - this could be due to an error in the application - or an invalid schedule",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "${errorMessage}"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+{
+    "/getUserSchedule": {
+        "get": {
+            "description": "Allows a user to view their schedule - you can also specify a date range(optional) - date based on workDate",
+            "requestBody": {
+                "userId": 1,
+                "startDate": "2022-01-14",
+                "endDate": "2022-03-24"
+            },
+            "headers": {
+                "authorization": {
+                    "Bearer": "{login_provided_bearer_token}"
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "gets a list of schedules for the user matching the specified date range only",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": [{
+                                    "id": 1,
+                                    "workDate": "2022-02-28",
+                                    "shiftLength": 8,
+                                    "createdAt": "2022-02-28T13:21:09.000Z",
+                                    "updatedAt": "2022-02-28T13:21:09.000Z",
+                                    "userId": 1
+                                }]
+
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request - some fields are missing from the request body",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "Bad Request"
+                                }
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "Server error occured - this could be due to an error in the application - or an invalid user",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "${errorMessage}"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+{
+    "/updateUser": {
+        "patch": {
+            "description": "Allows an admin to update a users details - only the userId is required",
+            "requestBody": {
+                "userId": 2,
+                "name": "osman",
+                "email": "uf@gmail.com",
+                "role": "STAFF"
+            },
+            "headers": {
+                "authorization": {
+                    "Bearer": "{login_provided_bearer_token}"
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Updates the users details",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "success": "User Updated",
+                                    "user": {
+                                        "id": 2,
+                                        "name": "osman",
+                                        "role": "STAFF",
+                                        "email": "uf@gmail.com",
+                                        "createdAt": "2022-02-27T09:42:56.000Z",
+                                        "updatedAt": "2022-02-27T09:45:50.752Z"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request - some required fields are missing from the request body",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "Bad Request"
+                                }
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "Server error occured - this could be due to an error in the application - or an invalid user",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "${errorMessage}"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+{
+    "/removeUser": {
+        "delete": {
+            "description": "Allows an admin to delete a user",
+            "requestBody": {
+                "userId": 3
+            },
+            "headers": {
+                "authorization": {
+                    "Bearer": "{login_provided_bearer_token}"
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "removes a particular user",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "success": "User Removed"
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Bad Request - some required fields are missing from the request body",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "Bad Request"
+                                }
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "Server error occured - this could be due to an error in the application - or an invalid user",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "${errorMessage}"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+{
+    "/getUsersInOrderOfTotalShiftLength": {
+        "get": {
+            "description": "gets a list of users ordered in descending order of their total shift hours for a specific date-range(optional)",
+            "requestBody": {
+                "startDate": "2022-01-14",
+                "endDate": "2022-03-24"
+            },
+            "headers": {
+                "authorization": {
+                    "Bearer": "{login_provided_bearer_token}"
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "gets ordered list of users by cummulative shift length",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": [{
+                                        "id": 1,
+                                        "name": "Faizal",
+                                        "role": "ADMIN",
+                                        "email": "faizal@gmail.com",
+                                        "createdAt": "2022-02-28T13:19:13.000Z",
+                                        "updatedAt": "2022-02-28T13:19:13.000Z",
+                                        "totalHours": 8
+                                    },
+                                    {
+                                        "id": 2,
+                                        "name": "Usman",
+                                        "role": "ADMIN",
+                                        "email": "usman1@gmail.com",
+                                        "createdAt": "2022-02-28T13:20:22.000Z",
+                                        "updatedAt": "2022-02-28T13:20:22.000Z",
+                                        "totalHours": 6
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "Server error occured - this could be due to an error in the application",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "${errorMessage}"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+{
+    "/getAllUsersSchedules": {
+        "get": {
+            "description": "Allows a user to get all users schedules",
+            "headers": {
+                "authorization": {
+                    "Bearer": "{login_provided_bearer_token}"
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "gets all the users schedules",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": [{
+                                        "id": 1,
+                                        "name": "Faizal",
+                                        "role": "ADMIN",
+                                        "email": "faizal@gmail.com",
+                                        "createdAt": "2022-02-28T13:19:13.000Z",
+                                        "updatedAt": "2022-02-28T13:19:13.000Z",
+                                        "schedules": [{
+                                            "id": 1,
+                                            "workDate": "2022-02-28",
+                                            "shiftLength": 8,
+                                            "createdAt": "2022-02-28T13:19:13.000Z",
+                                            "updatedAt": "2022-02-28T13:19:13.000Z",
+                                            "userId": 1
+                                        }]
+                                    },
+                                    {
+                                        "id": 2,
+                                        "name": "Usman",
+                                        "role": "ADMIN",
+                                        "email": "usman1@gmail.com",
+                                        "createdAt": "2022-02-28T13:20:22.000Z",
+                                        "updatedAt": "2022-02-28T13:20:22.000Z",
+                                        "schedules": [{
+                                            "id": 2,
+                                            "workDate": "2022-03-28",
+                                            "shiftLength": 6,
+                                            "createdAt": "2022-02-28T13:19:13.000Z",
+                                            "updatedAt": "2022-02-28T13:19:13.000Z",
+                                            "userId": 2
+                                        }]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "Server error occured - this could be due to an error in the application",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "message": "${errorMessage}"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+]
