@@ -1,0 +1,360 @@
+{
+	"info": {
+		"_postman_id": "345ea26a-7e6c-4ba7-b587-a7306ba23810",
+		"name": "UserScheduleTests",
+		"description": "Postman requests to test the api's",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Usman\",\r\n    \"email\":\"usman@gmail.com\",\r\n    \"password\":\"usman\",\r\n    \"role\":\"ADMIN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"register"
+					]
+				},
+				"description": "This is a sample register request"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/updateSchedule",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"scheduleId\":2,\r\n    \"workDate\":\"2022-03-14\",\r\n    \"shiftLength\":8\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/updateSchedule",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"updateSchedule"
+					]
+				},
+				"description": "this is a sample update schedule request"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/removeSchedule",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"scheduleId\":3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/removeSchedule",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"removeSchedule"
+					]
+				},
+				"description": "a sample remove schedule request"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/newSchedule",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJuYW1lIjoiVXNtYW4iLCJyb2xlIjoiQURNSU4iLCJlbWFpbCI6InVzbWFuMUBnbWFpbC5jb20iLCJjcmVhdGVkQXQiOiIyMDIyLTAyLTI4VDEzOjE0OjU5LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIyLTAyLTI4VDEzOjE0OjU5LjAwMFoifSwiaWF0IjoxNjQ2MDU0MTA3LCJleHAiOjE2NDYwNTc3MDd9.3e3GrtPPFg06CrNM6K3NPtE_gQ8egJUy6w_DCh0UwCk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":1,\r\n    \"workDate\":\"2022-04-18\",\r\n    \"shiftLength\":16\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/newSchedule",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"newSchedule"
+					]
+				},
+				"description": "sample create schedule request"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/updateUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJuYW1lIjoiVXNtYW4iLCJyb2xlIjoiQURNSU4iLCJlbWFpbCI6InVzbWFuQGdtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjItMDItMjhUMTQ6Mjg6NTIuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjItMDItMjhUMTQ6Mjg6NTIuMDAwWiJ9LCJpYXQiOjE2NDYwNTg1NjIsImV4cCI6MTY0NjA2MjE2Mn0.6OhXGTW9Jth-qXjIATZrXxD2vorA1d-Ju99C0MzCJtI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":2,\r\n    \"name\":\"usaman farooq\",\r\n    \"email\":\"usman@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/updateUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"updateUser"
+					]
+				},
+				"description": "sample update user request"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/removeUser",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/removeUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"removeUser"
+					]
+				},
+				"description": "sample remove user request"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/getUserSchedule",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRmFpemFsIiwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJmYWl6YWxAZ21haWwuY29tIiwiY3JlYXRlZEF0IjoiMjAyMi0wMi0yOFQxMzoxNjozOS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMi0wMi0yOFQxMzoxNjozOS4wMDBaIn0sImlhdCI6MTY0NjA1NDIyMywiZXhwIjoxNjQ2MDU3ODIzfQ.G6tqsy4KOPZxPNAOfDbTdgb4mrYFXfG3d7qEUunShc8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":1,\r\n    \"startDate\":\"2022-01-14\",\r\n    \"endDate\":\"2022-03-24\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/getUserSchedule",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"getUserSchedule"
+					]
+				},
+				"description": "sample get user schedule request"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/getUsersInOrderOfTotalShiftLength",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRmFpemFsIiwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJmYWl6YWxAZ21haWwuY29tIiwiY3JlYXRlZEF0IjoiMjAyMi0wMi0yOFQxMzoxNjozOS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMi0wMi0yOFQxMzoxNjozOS4wMDBaIn0sImlhdCI6MTY0NjA1NDIyMywiZXhwIjoxNjQ2MDU3ODIzfQ.G6tqsy4KOPZxPNAOfDbTdgb4mrYFXfG3d7qEUunShc8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"startDate\":\"2022-01-14\",\r\n    \"endDate\":\"2022-03-24\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/getUsersInOrderOfTotalShiftLength",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"getUsersInOrderOfTotalShiftLength"
+					]
+				},
+				"description": "sample request to get all users in order based on the total shift length"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/getAllUsersSchedules",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJuYW1lIjoiVXNtYW4iLCJyb2xlIjoiQURNSU4iLCJlbWFpbCI6InVzbWFuQGdtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjItMDMtMDFUMDg6Mjk6MDUuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjItMDMtMDFUMDg6Mjk6MDUuMDAwWiJ9LCJpYXQiOjE2NDYxMjMzNTEsImV4cCI6MTY0NjEyNjk1MX0.nE_3QlAfgk46_Kw_VuaAa8Y7UaPZIn7k7fj5J10wHE4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/getAllUsersSchedules",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"getAllUsersSchedules"
+					]
+				},
+				"description": "this is a request of getting all users schedules"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"usman@gmail.com\",\r\n    \"password\":\"usman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				},
+				"description": "this is the login request"
+			},
+			"response": []
+		}
+	]
+}
