@@ -7,7 +7,7 @@ beforeAll(async () => {
     await sequelize.sync();
 });
 
-describe("POST /register", () => {
+describe("Test cases for Register Login User and Schedule CRUD", () => {
     
     let bearer = "";
     let wrong_bearer = "wrong_bearer";
