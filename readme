@@ -13,3 +13,5 @@ I have purposely not ignored the .env file in .gitignore -
 as this is not production and just for testing
 
 the documentation is in 'openapis.description.json'
+
+the postman collection for testing is in postman\UserScheduleTests.postman_collection.json
