@@ -2,3 +2,12 @@ run these commands to start the application
 
 docker-compose up -d
 npm run insatll
+
+to stop 
+docker-compose down
+
+run this command to test
+npm test
+
+I have purposely not ignored the .env file in .gitignore - 
+as this is not production and just for testing

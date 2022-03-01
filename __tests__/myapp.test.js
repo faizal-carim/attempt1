@@ -1,24 +1,24 @@
-// we will use supertest to test HTTP requests/responses
 const request = require("supertest");
-// we also need our app for the correct routes!
 const app = require("../app");
 const sequelize = require("../util/database");
 
+
 beforeAll(async () => {
-    
-  });
+    await sequelize.sync();
+});
 
 describe("POST /register", () => {
-
+    
     let bearer = "";
     let userId = 1;
+    let email = "faizal"+Date.now()+"@gmail.com";
 
     test("It create a new user", async () => {
       const newUser = await request(app)
         .post("/register")
         .send({
             name:"Usman",
-            email:"usman@gmail.com",
+            email:email,
             password:"usman",
             role:"ADMIN"
         });
@@ -29,10 +29,11 @@ describe("POST /register", () => {
         const user = await request(app)
           .post("/login")
           .send({
-              email:"usman@gmail.com",
+              email:email,
               password:"usman"
           });
         bearer = user.body.token;
+        userId = user.body.userId;
         expect(user.statusCode).toBe(200);
     });
 
@@ -41,7 +42,7 @@ describe("POST /register", () => {
           .post("/newSchedule")
           .set({ "Authorization": 'Bearer '+ bearer })
           .send({
-            "userId":3,
+            "userId":userId,
             "workDate":"2022-04-18",
             "shiftLength":16
           });
@@ -53,7 +54,7 @@ describe("POST /register", () => {
           .patch("/updateUser")
           .set({ "Authorization": 'Bearer '+ bearer })
           .send({
-                "userId":3,
+                "userId":userId,
                 "name":"osman f"
           });
         expect(user.statusCode).toBe(200);
@@ -66,14 +67,16 @@ describe("POST /register", () => {
         expect(user.statusCode).toBe(200);
     });
 
+    
     test("It removes a user and all related schedules", async () => {
         const user = await request(app)
           .delete("/removeUser")
           .set({ "Authorization": 'Bearer '+ bearer })
           .send({
-            "userId":3
+            "userId":userId
            });
         expect(user.statusCode).toBe(200);
     });
+    
 
   });
