@@ -1,13 +1,15 @@
 run these commands to start the application
+- docker-compose up -d
+please wait until the database instance is up before running 'npm run start'
+- npm run start
 
-docker-compose up -d
-npm run insatll
+the required tables are created when starting the app
 
 to stop 
-docker-compose down
+- docker-compose down
 
-run this command to test
-npm test
+run this command to test - after docker compose and the database instance is up and running
+- npm test
 
 I have purposely not ignored the .env file in .gitignore - 
 as this is not production and just for testing

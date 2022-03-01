@@ -435,7 +435,7 @@
 {
     "/removeUser": {
         "delete": {
-            "description": "Allows an admin to delete a user",
+            "description": "Allows an admin to delete a user - this will also delete related schedules so we dont have orphaned schedules",
             "requestBody": {
                 "userId": 3
             },
