@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+
 const bcrypt = require("bcrypt");
 const sequelize = require("./util/database");
 const User = require("./models/user");
@@ -8,20 +8,6 @@ const Schedule = require("./models/schedule");
 const authentication = require("./auth/tokenValidation");
 
 User.hasMany(Schedule, {onDelete: 'cascade', hooks:true});
-
-sequelize
-  .sync({force:true})
-  .then((result) => {
-    return User.create({name:"Faizal",email:"faizal@gmail.com",role:"ADMIN",password:bcrypt.hashSync("faizal", bcrypt.genSaltSync(5), null)});
-    console.log(result);
-  })
-  .then(user => {
-    console.log("User created : ",user);
-    user.createSchedule({workDate:"2022-02-28",shiftLength:8});
-  })
-  .catch((err) => {
-    console.log(err);
-  });
 
 app.use(express.json());
 app.use('/register', require('./routes/register'));
@@ -39,8 +25,5 @@ app.get('/', (req, res) => {
   res.send('APIs are available!')
 })
 
-app.listen(port, () => {
-  console.log('APIs are available on port : ${port}')
-})
 
 module.exports = app;

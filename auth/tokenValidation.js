@@ -1,11 +1,13 @@
 const jwt = require("jsonwebtoken");
+const dotenv = require('dotenv');
+dotenv.config();
 
 module.exports = {
     loggedIn:(req, res, next) => {
         let token = req.get("authorization");
         if(token){
             token = token.slice(7);
-            jwt.verify(token,"invygo",(err, decoded) =>{
+            jwt.verify(token,process.env.KEY,(err, decoded) =>{
                 if(err){
                     return res.status(403).json({ message: "Invalid Token used"}); 
                 }else{
@@ -20,7 +22,7 @@ module.exports = {
         let token = req.get("authorization");
         if(token){
             token = token.slice(7);
-            jwt.verify(token,"invygo",(err, decoded) =>{
+            jwt.verify(token,process.env.KEY,(err, decoded) =>{
                 if(err){
                     return res.status(403).json({ message: "Invalid Token used"}); 
                 }else{

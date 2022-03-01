@@ -2,6 +2,8 @@ const sequelize = require("../util/database");
 const User = require("../models/user");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const login = async (req, res) => {
     try{
@@ -18,7 +20,7 @@ const login = async (req, res) => {
         
         if(result){
             user.password = undefined;
-            const jsonToken = jwt.sign({user},"invygo", {
+            const jsonToken = jwt.sign({user},process.env.KEY, {
                 expiresIn : "1h"
             });
             return res.status(200).json({
